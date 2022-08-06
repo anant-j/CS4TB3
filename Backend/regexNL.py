@@ -1,7 +1,7 @@
 # Importing libraries
 import time
 import exrex
-import random
+from generateSVG import genTree 
 import re
 from patternRecognizer import patternRecognition
 
@@ -9,7 +9,7 @@ maxRandomPermutations = 1000
 maxRandomCollisions = 5
 maxComplexityCharLevel = 20
 maxRepeatLimit = 5
-debugLevel = 1
+debugLevel = 0
 complexCharacters = set('*+[,{-')
 
 
@@ -64,6 +64,7 @@ def parse(regexInput):
         "patterns": patterns,
         "permutations": list(allPermutations),
         "processed": regexInput,
+        "svg": str(genTree(allPermutations)),
         "time": end - start
     }
 

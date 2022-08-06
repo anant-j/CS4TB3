@@ -13,8 +13,12 @@ globalKeyVal = {}  # Key-val store to cache popular requests and conserve execut
 def lambda_handler(event, context):
     try:
         inputstr = event['body']
-        decodedInput = str(base64.b64decode(inputstr))  # Decode base64 string
-        finalInput = unquote(decodedInput.split("input=")[1])[:-1]  # Convert input from URL to Text Format
+        try:
+            decodedInput = str(base64.b64decode(inputstr))  # Decode base64 string
+            finalInput = unquote(decodedInput.split("input=")[1])[:-1]  # Convert input from URL to Text Format
+        except:
+            finalInput = json.loads(inputstr)
+            finalInput = finalInput["input"]
         print(finalInput)  # For logging
         result = ""
         if(finalInput in globalKeyVal):
