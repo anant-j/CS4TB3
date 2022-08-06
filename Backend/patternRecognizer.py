@@ -1,18 +1,5 @@
 # Pattern Recognition Algorithms
-
 import re
-
-# Popularly used email regex
-emailRegex = r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+'
-# Popular patterns for phone number regexes:
-phoneRegexes = {
-    1: r"([1-9]{3}-[0-9]{3}-[0-9]{4})",  # 123-345-6789,
-    2: r"^\d{10}$",  # 1234567890
-    3: r"(\([1-9]{3}\)-[0-9]{3}{30-9]{4})",  # (123)-456-7890,
-    4: r"(\([1-9]{3}\)\s[0-9]{3}\s[0-9]{4})",  # (123) 456 7890
-    5: r"([1-9]{3}\s[0-9]{3}\s[0-9]{4})"  # 123 456 7890
-}
-
 
 # Get the minimum length possible for a regex from given permutations
 def minimumLength(permutations, inputRegex):
@@ -130,31 +117,6 @@ def checkPatternMatch(inputStr, patternInput):
         return True
     return False
 
-
-# Check for similarity to popular regex patterns such as phone number and
-# email regex validation
-def checkPopularPatterns(outputSet):
-    matches = {
-        "emails": None,
-        "phone": None
-    }
-    for word in outputSet:
-        if(checkPatternMatch(word, emailRegex) and (matches["emails"] is None or matches["emails"] is True)):
-            matches["emails"] = True
-        else:
-            matches["emails"] = False
-        phoneResult = []
-        for key in phoneRegexes:
-            regex = phoneRegexes[key]
-            phoneResult.append(checkPatternMatch(word, regex))
-        if (True in phoneResult and (
-                matches["phone"] is None or matches["phone"] is True)):
-            matches["phone"] = True
-        else:
-            matches["phone"] = False
-    return matches
-
-
 # Main method to compute all results
 def patternRecognition(permutations, inputRegex):
     patternsOutput = {}
@@ -162,5 +124,4 @@ def patternRecognition(permutations, inputRegex):
     patternsOutput["preceding"] = checkPrecedence(permutations)
     patternsOutput["proceeding"] = checkProceeding(permutations)
     patternsOutput["oddEven"] = checkOddEven(permutations)
-    patternsOutput["popularPatterns"] = checkPopularPatterns(permutations)
     return patternsOutput
