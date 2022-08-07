@@ -83,9 +83,9 @@ def getRandomPermutations(regexInput):
 
 
 def simplifyOnce(inputRegex):
-    new = re.sub(r'(.*)\*\1\*', r'\g<1>*', inputRegex)
-    new = re.sub(r'(.*)\+\1\*', r'\g<1>+', new)
-    new = re.sub(r'(.*)\*\1\+', r'\g<1>+', new)
+    new = re.sub(r'(.)\*\1\*', r'\g<1>*', inputRegex)
+    new = re.sub(r'(.)\+\1\*', r'\g<1>+', new)
+    new = re.sub(r'(.)\*\1\+', r'\g<1>+', new)
     return(new)
 
 
